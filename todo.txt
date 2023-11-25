@@ -13,14 +13,14 @@ igual
 zera
 multiplica
 soma
-COMANDOS PRONTOS MAS FALTA TESTAR DPS:
 menor QUE
 maior QUE
 maior ou igual 
 menor ou igual
 
+COMANDOS PRONTOS MAS FALTA TESTAR DPS:
+
 FALTA:
- 
  
 execute
 se

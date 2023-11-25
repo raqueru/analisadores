@@ -8,5 +8,8 @@ int c=atoi(argv[3]);
 a = 0;
 a=a * b;
 b=c + b;
+while(a > b){
+a + b;
+}
 printf("%d",c);
 }
