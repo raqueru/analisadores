@@ -1,0 +1,32 @@
+TUDO QUE TEMOS:
+program
+varlist
+cmds
+RECEBA
+DEVOLVA
+ACABOU
+FIM
+
+COMANDOS PRONTOS:
+while
+igual
+zera
+
+
+COMANDOS PRONTOS MAS FALTA TESTAR DPS:
+menor QUE
+maior QUE
+maior ou igual 
+menor ou igual
+
+FALTA:
+soma
+multiplica
+execute
+se
+entao
+senao 
+ 
+
+
+free nos buffers 

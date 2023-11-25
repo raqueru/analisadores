@@ -95,7 +95,7 @@ cmds:
 
 cmd: 
 ENQUANTO VARNAME FACA cmds FIM
-{
+		{
 
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 
@@ -122,23 +122,47 @@ ENQUANTO VARNAME FACA cmds FIM
 		strcat(buf,"}\n");
 		$$ = strdup(buf);
 
-} |
-VARNAME EQ VARNAME{
+		} |
+VARNAME EQ VARNAME
+	{
 	char buf[500];
 
     sprintf(buf,"%s = %s;\n",$1,$3);
 
 	$$ = strdup(buf);
 
-}
-| ZERA ABREPAR VARNAME FECHAPAR {
+	}
+| 
+ZERA ABREPAR VARNAME FECHAPAR 
+	{
 	char buf[500];
 	sprintf(buf,"%s = 0;\n",$3);
     $$ = strdup(buf);
-
-
+} |
+GT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
+	{
+	char buf[500];
+	sprintf(buf,"%s > 0;\n",$3);
+    $$ = strdup(buf);
+} |
+LT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
+	{
+	char buf[500];
+	sprintf(buf,"%s < 0;\n",$3);
+    $$ = strdup(buf);
+} |
+GE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
+	{
+	char buf[500];
+	sprintf(buf,"%s >= 0;\n",$3);
+    $$ = strdup(buf);
+} |
+LE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
+	{
+	char buf[500];
+	sprintf(buf,"%s <= 0;\n",$3);
+    $$ = strdup(buf);
 } 
-
 %%
 
 void yyerror(char *c)
