@@ -73,7 +73,9 @@ extern int yydebug;
     SE = 274,                      /* SE  */
     ENTAO = 275,                   /* ENTAO  */
     SENAO = 276,                   /* SENAO  */
-    VARNAME = 277                  /* VARNAME  */
+    MULT = 277,                    /* MULT  */
+    SOMA = 278,                    /* SOMA  */
+    VARNAME = 279                  /* VARNAME  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -101,7 +103,9 @@ extern int yydebug;
 #define SE 274
 #define ENTAO 275
 #define SENAO 276
-#define VARNAME 277
+#define MULT 277
+#define SOMA 278
+#define VARNAME 279
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -113,7 +117,7 @@ union YYSTYPE
     int intval;
     char* strval;
 
-#line 117 "y.tab.h"
+#line 121 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

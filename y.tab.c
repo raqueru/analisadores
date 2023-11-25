@@ -146,7 +146,9 @@ extern int yydebug;
     SE = 274,                      /* SE  */
     ENTAO = 275,                   /* ENTAO  */
     SENAO = 276,                   /* SENAO  */
-    VARNAME = 277                  /* VARNAME  */
+    MULT = 277,                    /* MULT  */
+    SOMA = 278,                    /* SOMA  */
+    VARNAME = 279                  /* VARNAME  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -174,7 +176,9 @@ extern int yydebug;
 #define SE 274
 #define ENTAO 275
 #define SENAO 276
-#define VARNAME 277
+#define MULT 277
+#define SOMA 278
+#define VARNAME 279
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -186,7 +190,7 @@ union YYSTYPE
     int intval;
     char* strval;
 
-#line 190 "y.tab.c"
+#line 194 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -228,12 +232,14 @@ enum yysymbol_kind_t
   YYSYMBOL_SE = 19,                        /* SE  */
   YYSYMBOL_ENTAO = 20,                     /* ENTAO  */
   YYSYMBOL_SENAO = 21,                     /* SENAO  */
-  YYSYMBOL_VARNAME = 22,                   /* VARNAME  */
-  YYSYMBOL_YYACCEPT = 23,                  /* $accept  */
-  YYSYMBOL_program = 24,                   /* program  */
-  YYSYMBOL_varlist = 25,                   /* varlist  */
-  YYSYMBOL_cmds = 26,                      /* cmds  */
-  YYSYMBOL_cmd = 27                        /* cmd  */
+  YYSYMBOL_MULT = 22,                      /* MULT  */
+  YYSYMBOL_SOMA = 23,                      /* SOMA  */
+  YYSYMBOL_VARNAME = 24,                   /* VARNAME  */
+  YYSYMBOL_YYACCEPT = 25,                  /* $accept  */
+  YYSYMBOL_program = 26,                   /* program  */
+  YYSYMBOL_varlist = 27,                   /* varlist  */
+  YYSYMBOL_cmds = 28,                      /* cmds  */
+  YYSYMBOL_cmd = 29                        /* cmd  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -561,19 +567,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   23
+#define YYLAST   73
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  23
+#define YYNTOKENS  25
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  9
+#define YYNRULES  16
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  27
+#define YYNSTATES  64
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   277
+#define YYMAXUTOK   279
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -614,14 +620,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    30,    30,    59,    68,    80,    88,    97,   126,   134
+       0,    30,    30,    59,    68,    80,    88,    97,   126,   135,
+     157,   163,   169,   175,   181,   187,   193
 };
 #endif
 
@@ -640,7 +647,8 @@ static const char *const yytname[] =
   "\"end of file\"", "error", "\"invalid token\"", "AQUIACABOU", "EQ",
   "RECEBA", "DEVOLVA", "HORADOSHOW", "ENQUANTO", "FACA", "FIM", "VIRGULA",
   "GT", "LT", "GE", "LE", "ABREPAR", "FECHAPAR", "ZERA", "SE", "ENTAO",
-  "SENAO", "VARNAME", "$accept", "program", "varlist", "cmds", "cmd", YY_NULLPTR
+  "SENAO", "MULT", "SOMA", "VARNAME", "$accept", "program", "varlist",
+  "cmds", "cmd", YY_NULLPTR
 };
 
 static const char *
@@ -650,7 +658,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-18)
+#define YYPACT_NINF (-17)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -664,9 +672,13 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -1,   -17,     6,    -3,     3,   -18,   -17,   -17,   -18,     4,
-      -8,   -10,     0,     9,    12,    -8,     8,    -2,     1,   -18,
-     -18,    -8,     2,   -18,    11,   -18,   -18
+      -2,   -16,     9,     0,    16,   -17,   -16,   -16,   -17,    18,
+      -8,     2,    14,    15,    17,    19,    20,    21,    22,    28,
+      31,    -8,    30,    23,    24,    25,    26,    27,    29,    32,
+       5,   -17,   -17,    -8,    33,    34,    35,    41,    37,    44,
+      46,    28,   -17,    48,    36,    38,    39,    40,   -17,    42,
+      43,   -17,    51,    52,    53,    54,    55,    56,   -17,   -17,
+     -17,   -17,   -17,   -17
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -675,20 +687,24 @@ static const yytype_int8 yypact[] =
 static const yytype_int8 yydefact[] =
 {
        0,     0,     0,     4,     0,     1,     0,     0,     3,     0,
-       0,     0,     0,     0,     0,     6,     0,     0,     0,     2,
-       5,     0,     0,     8,     0,     9,     7
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     6,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     2,     5,     0,     0,     0,     0,     0,     0,     0,
+       0,     8,     9,     0,     0,     0,     0,     0,    10,     0,
+       0,     7,     0,     0,     0,     0,     0,     0,    11,    12,
+      13,    14,    15,    16
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -18,   -18,    -4,   -14,   -18
+     -17,   -17,    -5,    -9,   -17
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     4,    14,    15
+       0,     2,     4,    20,    21
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -696,37 +712,53 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      11,    20,     8,     9,     1,     3,     5,    24,     6,     7,
-      12,    10,    16,    18,    13,    19,    17,    21,     0,    25,
-      22,    26,     0,    23
+      11,     8,     9,     1,    12,    13,    14,    15,     3,     5,
+      16,     6,    32,    11,    17,    18,    19,    12,    13,    14,
+      15,    42,     7,    16,    43,    10,    22,    17,    18,    41,
+      23,    24,    30,    25,    31,    26,    27,    28,    29,    33,
+       0,     0,     0,     0,    44,    45,    46,    34,    35,    36,
+      37,    38,    47,    39,    48,    49,    40,    50,    51,     0,
+      52,     0,    53,    54,    55,     0,    56,    57,    58,    59,
+      60,    61,    62,    63
 };
 
 static const yytype_int8 yycheck[] =
 {
-       8,    15,     6,     7,     5,    22,     0,    21,    11,     6,
-      18,     7,    22,     4,    22,     3,    16,     9,    -1,    17,
-      22,    10,    -1,    22
+       8,     6,     7,     5,    12,    13,    14,    15,    24,     0,
+      18,    11,    21,     8,    22,    23,    24,    12,    13,    14,
+      15,    30,     6,    18,    33,     7,    24,    22,    23,    24,
+      16,    16,     4,    16,     3,    16,    16,    16,    16,     9,
+      -1,    -1,    -1,    -1,    11,    11,    11,    24,    24,    24,
+      24,    24,    11,    24,    17,    11,    24,    11,    10,    -1,
+      24,    -1,    24,    24,    24,    -1,    24,    24,    17,    17,
+      17,    17,    17,    17
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     5,    24,    22,    25,     0,    11,     6,    25,    25,
-       7,     8,    18,    22,    26,    27,    22,    16,     4,     3,
-      26,     9,    22,    22,    26,    17,    10
+       0,     5,    26,    24,    27,     0,    11,     6,    27,    27,
+       7,     8,    12,    13,    14,    15,    18,    22,    23,    24,
+      28,    29,    24,    16,    16,    16,    16,    16,    16,    16,
+       4,     3,    28,     9,    24,    24,    24,    24,    24,    24,
+      24,    24,    28,    28,    11,    11,    11,    11,    17,    11,
+      11,    10,    24,    24,    24,    24,    24,    24,    17,    17,
+      17,    17,    17,    17
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    23,    24,    25,    25,    26,    26,    27,    27,    27
+       0,    25,    26,    27,    27,    28,    28,    29,    29,    29,
+      29,    29,    29,    29,    29,    29,    29
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     7,     3,     1,     2,     1,     5,     3,     4
+       0,     2,     7,     3,     1,     2,     1,     5,     3,     3,
+       4,     6,     6,     6,     6,     6,     6
 };
 
 
@@ -1217,7 +1249,7 @@ yyreduce:
 		printf("PROGRAMA!");
 
 	}
-#line 1221 "y.tab.c"
+#line 1253 "y.tab.c"
     break;
 
   case 3: /* varlist: VARNAME VIRGULA varlist  */
@@ -1229,7 +1261,7 @@ yyreduce:
 		(yyval.listVal)=node;
 		printf("int %s; \n ",((yyvsp[-2].strval)));
 	}
-#line 1233 "y.tab.c"
+#line 1265 "y.tab.c"
     break;
 
   case 4: /* varlist: VARNAME  */
@@ -1241,7 +1273,7 @@ yyreduce:
 		(yyval.listVal)=node;
 		printf("int %s ",((yyvsp[0].strval)));
 	}
-#line 1245 "y.tab.c"
+#line 1277 "y.tab.c"
     break;
 
   case 5: /* cmds: cmd cmds  */
@@ -1252,7 +1284,7 @@ yyreduce:
 		node->next= (yyvsp[0].listVal);
 		(yyval.listVal)=node;
 	}
-#line 1256 "y.tab.c"
+#line 1288 "y.tab.c"
     break;
 
   case 6: /* cmds: cmd  */
@@ -1263,18 +1295,17 @@ yyreduce:
 		node->next=NULL;
 		(yyval.listVal)=node;
 	}
-#line 1267 "y.tab.c"
+#line 1299 "y.tab.c"
     break;
 
   case 7: /* cmd: ENQUANTO VARNAME FACA cmds FIM  */
 #line 98 "horadoshow.y"
-{
+                {
 
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 
 		int sizeComandos=0;
 		node= (yyvsp[-1].listVal);
-		printf("antes while\n");
 
 		while(node!=NULL){
 			sizeComandos+= strlen(node->string);
@@ -1295,37 +1326,121 @@ yyreduce:
 		strcat(buf,"}\n");
 		(yyval.strval) = strdup(buf);
 
-}
-#line 1300 "y.tab.c"
+		}
+#line 1331 "y.tab.c"
     break;
 
   case 8: /* cmd: VARNAME EQ VARNAME  */
-#line 126 "horadoshow.y"
-                  {
+#line 127 "horadoshow.y"
+        {
 	char buf[500];
 
     sprintf(buf,"%s = %s;\n",(yyvsp[-2].strval),(yyvsp[0].strval));
 
 	(yyval.strval) = strdup(buf);
 
-}
-#line 1313 "y.tab.c"
+	}
+#line 1344 "y.tab.c"
     break;
 
-  case 9: /* cmd: ZERA ABREPAR VARNAME FECHAPAR  */
-#line 134 "horadoshow.y"
-                                {
+  case 9: /* cmd: VARNAME EQ cmds  */
+#line 136 "horadoshow.y"
+        {
+	StringList *node = (StringList*) malloc(sizeof(StringList));
+		int sizeComandos=0;
+		node= (yyvsp[0].listVal);
+		while(node!=NULL){
+			sizeComandos+= strlen(node->string);
+			node= node->next;
+ 		}
+   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+ 		node= (yyvsp[0].listVal);
+		strcat(buf,(yyvsp[-2].strval));
+		strcat(buf,"=");
+
+		while(node!=NULL){
+			strcat(buf,node->string);
+			node= node->next;
+		}
+ 	    
+	(yyval.strval) = strdup(buf);
+
+	}
+#line 1370 "y.tab.c"
+    break;
+
+  case 10: /* cmd: ZERA ABREPAR VARNAME FECHAPAR  */
+#line 158 "horadoshow.y"
+        {
 	char buf[500];
 	sprintf(buf,"%s = 0;\n",(yyvsp[-1].strval));
     (yyval.strval) = strdup(buf);
-
-
 }
-#line 1325 "y.tab.c"
+#line 1380 "y.tab.c"
+    break;
+
+  case 11: /* cmd: GT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
+#line 164 "horadoshow.y"
+        {
+	char buf[500];
+	sprintf(buf,"%s > %s;\n",(yyvsp[-3].strval),(yyvsp[-1].strval));
+    (yyval.strval) = strdup(buf);
+}
+#line 1390 "y.tab.c"
+    break;
+
+  case 12: /* cmd: LT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
+#line 170 "horadoshow.y"
+        {
+	char buf[500];
+	sprintf(buf,"%s < %s;\n",(yyvsp[-3].strval),(yyvsp[-1].strval));
+    (yyval.strval) = strdup(buf);
+}
+#line 1400 "y.tab.c"
+    break;
+
+  case 13: /* cmd: GE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
+#line 176 "horadoshow.y"
+        {
+	char buf[500];
+	sprintf(buf,"%s >= %s;\n",(yyvsp[-3].strval),(yyvsp[-1].strval));
+    (yyval.strval) = strdup(buf);
+}
+#line 1410 "y.tab.c"
+    break;
+
+  case 14: /* cmd: LE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
+#line 182 "horadoshow.y"
+        {
+	char buf[500];
+	sprintf(buf,"%s <= %s;\n",(yyvsp[-3].strval),(yyvsp[-1].strval));
+    (yyval.strval) = strdup(buf);
+}
+#line 1420 "y.tab.c"
+    break;
+
+  case 15: /* cmd: MULT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
+#line 188 "horadoshow.y"
+        {
+	char buf[500];
+	sprintf(buf,"%s * %s;\n",(yyvsp[-3].strval),(yyvsp[-1].strval));
+    (yyval.strval) = strdup(buf);
+}
+#line 1430 "y.tab.c"
+    break;
+
+  case 16: /* cmd: SOMA ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
+#line 194 "horadoshow.y"
+        {
+	char buf[500];
+	sprintf(buf,"%s + %s;\n",(yyvsp[-3].strval),(yyvsp[-1].strval));
+    (yyval.strval) = strdup(buf);
+}
+#line 1440 "y.tab.c"
     break;
 
 
-#line 1329 "y.tab.c"
+#line 1444 "y.tab.c"
 
       default: break;
     }
@@ -1518,7 +1633,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 142 "horadoshow.y"
+#line 200 "horadoshow.y"
 
 
 void yyerror(char *c)

@@ -5,8 +5,8 @@
 int a=atoi(argv[1]); 
 int b=atoi(argv[2]); 
 int c=atoi(argv[3]); 
-while(a){
-a = b;
-}
+a = 0;
+a=a * b;
+b=c + b;
 printf("%d",c);
 }

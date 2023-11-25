@@ -1,6 +1,7 @@
 RECEBA a,b,c 
 DEVOLVA c 
 HORADOSHOW 
-ENQUANTO a FACA a=b 
-FIM
+ZERA(a)
+a= MULT(a,b)
+b= SOMA(c,b)
 AQUIACABOU

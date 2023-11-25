@@ -11,8 +11,8 @@ COMANDOS PRONTOS:
 while
 igual
 zera
-
-
+multiplica
+soma
 COMANDOS PRONTOS MAS FALTA TESTAR DPS:
 menor QUE
 maior QUE
@@ -20,8 +20,8 @@ maior ou igual
 menor ou igual
 
 FALTA:
-soma
-multiplica
+ 
+ 
 execute
 se
 entao
