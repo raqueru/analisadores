@@ -3,7 +3,5 @@ DEVOLVA c
 HORADOSHOW 
 ZERA(a)
 a= MULT(a,b)
-b= SOMA(c,b)
- ENQUANTO GT(a,b) FACA SOMA(a,b)
-FIM
+
 AQUIACABOU
