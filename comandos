@@ -1,4 +1,0 @@
-yacc -dy horadoshow.y
-lex horadoshow.l
-gcc -o horadoshow lex.yy.c y.tab.c
-./horadoshow
