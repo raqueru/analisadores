@@ -239,8 +239,7 @@ cmd:
 		strcat(buf,"}\n");
 		$$ = strdup(buf);
 } |
- EXECUTE  VARNAME VIRGULA cmds 
- {
+ EXECUTE ABREPAR VARNAME VIRGULA cmds FECHAPAR {
 	printf("ASASASASAS");
 
 	StringList *node = (StringList*) malloc(sizeof(StringList));
