@@ -6,7 +6,7 @@
 
 int yylex();	
 void yyerror(char *c);
-extern FILE *yyin;
+extern FILE *yyin; 
 extern int yyparse();
 FILE *output;
 %}
@@ -17,25 +17,7 @@ FILE *output;
     char* strval;
 }
  
-%token AQUIACABOU
-	EQ
-	RECEBA
-	DEVOLVA
-	HORADOSHOW
-	ENQUANTO
-	FACA
-	FIM
-	VIRGULA
-	GT
-	LT
-	GE
-	LE
-	ABREPAR
-	FECHAPAR
-	ZERA
-	SE
-	ENTAO
-	SENAO
+%token AQUIACABOU EQ RECEBA DEVOLVA HORADOSHOW ENQUANTO FACA FIM VIRGULA GT LT GE LE ABREPAR FECHAPAR ZERA SE ENTAO SENAO MULT SOMA
 %token <strval> VARNAME
 %type <listVal> varlist cmds  
 %type <strval> cmd
@@ -149,6 +131,26 @@ cmd:
 		$$ = strdup(buf);
 
 	}
+	| VARNAME EQ cmds
+		{ 
+		
+		StringList *node = (StringList*) malloc(sizeof(StringList));
+		int sizeComandos=0;
+		node= $3;
+		while(node!=NULL) {
+			sizeComandos+= strlen(node->string);
+			node= node->next;
+			}
+		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+		node= $3;
+		strcat (buf, $1);
+		strcat (buf, "=");
+		while (node!=NULL) {
+			strcat (buf, node->string);
+			node= node->next;
+			}
+		$$ = strdup (buf);
+	}
 
 	| ZERA ABREPAR VARNAME FECHAPAR 
 	{
@@ -184,8 +186,9 @@ cmd:
 		sprintf(buf,"%s <= 0;\n",$3);
     	$$ = strdup(buf);
 	} 
+	|
 	
-	| SE ABREPAR cmds FECHAPAR ENTAO cmds
+	SE ABREPAR cmds FECHAPAR ENTAO cmds
 	{
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		int sizeConditions = 0;
@@ -216,6 +219,20 @@ cmd:
 		}strcat(buf,"}\n");
 		$$ = strdup(buf);
 } 
+|
+MULT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR
+{
+char buf[500];
+sprintf(buf, "%s * %s;\n", $3,$5);
+$$ = strdup(buf);
+}
+|
+SOMA ABREPAR VARNAME VIRGULA VARNAME FECHAPAR
+{
+char buf[500];
+sprintf(buf, "%s + %s;\n", $3,$5);
+$$ = strdup (buf);
+}
 %%
 
 void yyerror(char *c)

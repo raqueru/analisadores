@@ -22,12 +22,15 @@ ENQUANTO {return ENQUANTO;}
 FACA {return FACA;}
 FIM {return FIM;}
 , {return VIRGULA;}
-\> {return GT;}
-\< {return LT;}
+GT {return GT;}
+LT {return LT;}
 ZERA { return ZERA;}
-\>= {return GE;}
-\<= {return LE;}
+GE {return GE;}
+LE {return LE;}
 AQUIACABOU {return AQUIACABOU;}
+MULT {return MULT;}
+SOMA {return SOMA;}
+
 = {return EQ;}
 
 [a-zA-Z]([a-zA-Z0-9])* {
