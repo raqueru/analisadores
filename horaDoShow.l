@@ -14,6 +14,8 @@ RECEBA {return RECEBA;}
 DEVOLVA {return DEVOLVA;}
 HORADOSHOW {return HORADOSHOW;}
 SE {return SE;}
+FIMSE {return SE;}
+
 ENTAO {return ENTAO;} 
 SENAO {return SENAO;}
 ENQUANTO {return ENQUANTO;}
@@ -30,6 +32,7 @@ LE {return LE;}
 AQUIACABOU {return AQUIACABOU;}
 MULT {return MULT;}
 SOMA {return SOMA;}
+EXECUTE {return EXECUTE;}
 
 = {return EQ;}
 

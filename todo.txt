@@ -17,16 +17,16 @@ menor QUE
 maior QUE
 maior ou igual 
 menor ou igual
-
+se
+entao
+senao 
+ 
 COMANDOS PRONTOS MAS FALTA TESTAR DPS:
 
 FALTA:
  
 execute
-se
-entao
-senao 
- 
+VERIFICAR O a=b com e sem ; 
 
 
 free nos buffers 

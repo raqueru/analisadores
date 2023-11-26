@@ -5,11 +5,28 @@
 int a=atoi(argv[1]); 
 int b=atoi(argv[2]); 
 int c=atoi(argv[3]); 
-a = 0;
-a=a * b;
-b=c + b;
-while(a > b){
+a = 0a=a * b;
+a=if(a > 0){
 a + b;
+}
+else{
+a * c;
+int cont=0;
+while(cont<a){
+a = b;
+}
+int cont=0;
+while(cont<a){
+a = b;
+}
+int cont=0;
+while(cont<a){
+a = b;
+}
+int cont=0;
+while(cont<a){
+a = b;
+}
 }
 printf("%d",c);
 }

@@ -75,7 +75,8 @@ extern int yydebug;
     SENAO = 276,                   /* SENAO  */
     MULT = 277,                    /* MULT  */
     SOMA = 278,                    /* SOMA  */
-    VARNAME = 279                  /* VARNAME  */
+    EXECUTE = 279,                 /* EXECUTE  */
+    VARNAME = 280                  /* VARNAME  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -105,19 +106,20 @@ extern int yydebug;
 #define SENAO 276
 #define MULT 277
 #define SOMA 278
-#define VARNAME 279
+#define EXECUTE 279
+#define VARNAME 280
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "horadoshow.y"
+#line 14 "horadoshow.y"
 
 	StringList* listVal;
     int intval;
     char* strval;
 
-#line 121 "y.tab.h"
+#line 123 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

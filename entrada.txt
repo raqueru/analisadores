@@ -3,5 +3,8 @@ DEVOLVA c
 HORADOSHOW 
 ZERA(a)
 a= MULT(a,b)
+a=3
+SE GT(a,b) ENTAO SOMA(a,b) SENAO MULT(a,c)
+EXECUTE(a,a=b)
 
 AQUIACABOU

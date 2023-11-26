@@ -17,7 +17,7 @@ FILE *output;
     char* strval;
 }
  
-%token AQUIACABOU EQ RECEBA DEVOLVA HORADOSHOW ENQUANTO FACA FIM VIRGULA GT LT GE LE ABREPAR FECHAPAR ZERA SE ENTAO SENAO MULT SOMA
+%token AQUIACABOU EQ RECEBA DEVOLVA HORADOSHOW ENQUANTO FACA FIM VIRGULA GT LT GE LE ABREPAR FECHAPAR ZERA SE ENTAO SENAO MULT SOMA EXECUTE
 %token <strval> VARNAME
 %type <listVal> varlist cmds  
 %type <strval> cmd
@@ -75,7 +75,6 @@ varlist:
 		node->string = $1;
 		node->next = NULL;
 		$$ = node;
-		printf("int %s ",($1));
 	}
 
 cmds:
@@ -123,6 +122,30 @@ cmd:
 		$$ = strdup(buf);
 
 	}
+	|
+	ENQUANTO cmd FACA cmds FIM
+	{
+		StringList *node = (StringList*) malloc(sizeof(StringList));
+		int sizeComandos = 0;
+		node = $4;
+		while(node != NULL){
+			sizeComandos+= strlen(node->string);
+			node = node->next;
+		}
+
+   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+		strcat(buf,"while(");
+		strcat(buf, $2);
+		strcat(buf,"){\n");
+		node = $4;
+		while(node != NULL){
+			strcat(buf,node->string);
+			node= node->next;
+		}
+		strcat(buf,"}\n");
+		$$ = strdup(buf);
+
+	}
 		
 	| VARNAME EQ VARNAME
 	{
@@ -155,70 +178,119 @@ cmd:
 	| ZERA ABREPAR VARNAME FECHAPAR 
 	{
 		char buf[500];
-		sprintf(buf,"%s = 0;\n",$3);
+		sprintf(buf,"%s = 0",$3);
     	$$ = strdup(buf);
 	} 
+	|
+	
+	SE cmd ENTAO cmds
+	{
+		StringList *node = (StringList*) malloc(sizeof(StringList));
+		int sizeComandos = 0;
+		node = $4;
+		while(node != NULL){
+			sizeComandos+= strlen(node->string);
+			node = node->next;
+		}
 
-	| GT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
+   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+		strcat(buf,"if(");
+		strcat(buf, $2);
+		strcat(buf,"){\n");
+		node = $4;
+		while(node != NULL){
+			strcat(buf,node->string);
+			node= node->next;
+		}
+		strcat(buf,"}\n");
+		$$ = strdup(buf);
+} |	SE cmd ENTAO cmds SENAO cmds
+	{
+		StringList *node = (StringList*) malloc(sizeof(StringList));
+		int sizeComandosIf = 0;
+		int sizeComandosElse = 0;
+
+		node = $4;
+		while(node != NULL){
+			sizeComandosIf+= strlen(node->string);
+			node = node->next;
+		}
+		node = $6;
+		while(node != NULL){
+			sizeComandosElse+= strlen(node->string);
+			node = node->next;
+		}
+   		char *buf = (char*) malloc(sizeof(char)*sizeComandosIf + sizeof(char)*sizeComandosElse+ 100 );
+		strcat(buf,"if(");
+		strcat(buf, $2);
+		strcat(buf,"){\n");
+		node = $4;
+		while(node != NULL){
+			strcat(buf,node->string);
+			node= node->next;
+		}
+		strcat(buf,"}\n");
+		strcat(buf,"else{\n");
+		node = $6;
+		while(node != NULL){
+			strcat(buf,node->string);
+			node= node->next;
+		}
+		strcat(buf,"}\n");
+		$$ = strdup(buf);
+} |
+ EXECUTE  VARNAME VIRGULA cmds 
+ {
+	printf("ASASASASAS");
+
+	StringList *node = (StringList*) malloc(sizeof(StringList));
+		int sizeComandos = 0;
+		node = $5;
+		while(node != NULL){
+			sizeComandos+= strlen(node->string);
+			node = node->next;
+		}
+   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+		printf("ASASASASAS");
+		strcat(buf,"int cont=0;\n");
+		strcat(buf,"while(cont<");
+		strcat(buf,$3);
+		strcat(buf,"){\n");
+		node = $5;
+		while(node != NULL){
+			strcat(buf,node->string);
+			node= node->next;
+		}
+		strcat(buf,"}\n");
+		$$ = strdup(buf);
+ }|
+GT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
 	{
 		char buf[500];
-		sprintf(buf,"%s > 0;\n",$3);
-    	$$ = strdup(buf);
+		sprintf(buf,"%s > 0",$3);
+    $$ = strdup(buf);
 	} 
 	
 	| LT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
 	{
 		char buf[500];
-		sprintf(buf,"%s < 0;\n",$3);
-    	$$ = strdup(buf);
+		sprintf(buf,"%s < 0",$3);
+    $$ = strdup(buf);
 	} 
 	
 	| GE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
 	{
 		char buf[500];
-		sprintf(buf,"%s >= 0;\n",$3);
-    	$$ = strdup(buf);
+		sprintf(buf,"%s >= 0",$3);
+    $$ = strdup(buf);
 	}
 	 
 	| LE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR 
 	{
 		char buf[500];
-		sprintf(buf,"%s <= 0;\n",$3);
-    	$$ = strdup(buf);
+		sprintf(buf,"%s <= 0",$3);
+    $$ = strdup(buf);
 	} 
-	|
-	
-	SE ABREPAR cmds FECHAPAR ENTAO cmds
-	{
-		StringList *node = (StringList*) malloc(sizeof(StringList));
-		int sizeConditions = 0;
-		int sizeCmds=0;
-
-		node = $3;
-		while(node != NULL){
-			sizeConditions+= strlen(node->string);
-			node = node->next;
- 		}
-		node = $6;
-		while(node != NULL){
-			sizeCmds+= strlen(node->string);
-			node = node->next;
- 		}
-   		char *buf = (char*) malloc(sizeof(char)*sizeConditions +sizeof(char)*sizeCmds+  100 );
-		strcat(buf,"if(");
-		
- 		node = $3;
-		while(node != NULL){
-			strcat(buf,node->string);
-			node= node->next;
-		}strcat(buf,"){\n");		
-		node = $6;
-			while(node != NULL){
-			strcat(buf,node->string);
-			node= node->next;
-		}strcat(buf,"}\n");
-		$$ = strdup(buf);
-} 
 |
 MULT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR
 {
@@ -233,6 +305,8 @@ char buf[500];
 sprintf(buf, "%s + %s;\n", $3,$5);
 $$ = strdup (buf);
 }
+ 
+
 %%
 
 void yyerror(char *c)
