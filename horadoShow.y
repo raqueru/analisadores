@@ -93,7 +93,6 @@ varlist:
 		node->string = $1;
 		node->next = $3;
 		$$ = node;
-		printf("int %s; \n ",($1));
 	}
 	
 	| VARNAME 
