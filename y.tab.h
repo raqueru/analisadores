@@ -61,7 +61,7 @@ extern int yydebug;
     HORADOSHOW = 262,              /* HORADOSHOW  */
     ENQUANTO = 263,                /* ENQUANTO  */
     FACA = 264,                    /* FACA  */
-    FIM = 265,                     /* FIM  */
+    FIMENQUANTO = 265,             /* FIMENQUANTO  */
     VIRGULA = 266,                 /* VIRGULA  */
     GT = 267,                      /* GT  */
     LT = 268,                      /* LT  */
@@ -76,7 +76,9 @@ extern int yydebug;
     MULT = 277,                    /* MULT  */
     SOMA = 278,                    /* SOMA  */
     EXECUTE = 279,                 /* EXECUTE  */
-    VARNAME = 280                  /* VARNAME  */
+    FIMSE = 280,                   /* FIMSE  */
+    VARNAME = 281,                 /* VARNAME  */
+    NUMBER = 282                   /* NUMBER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -92,7 +94,7 @@ extern int yydebug;
 #define HORADOSHOW 262
 #define ENQUANTO 263
 #define FACA 264
-#define FIM 265
+#define FIMENQUANTO 265
 #define VIRGULA 266
 #define GT 267
 #define LT 268
@@ -107,7 +109,9 @@ extern int yydebug;
 #define MULT 277
 #define SOMA 278
 #define EXECUTE 279
-#define VARNAME 280
+#define FIMSE 280
+#define VARNAME 281
+#define NUMBER 282
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -119,7 +123,7 @@ union YYSTYPE
     int intval;
     char* strval;
 
-#line 123 "y.tab.h"
+#line 127 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

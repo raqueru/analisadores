@@ -131,7 +131,7 @@ extern int yydebug;
     HORADOSHOW = 262,              /* HORADOSHOW  */
     ENQUANTO = 263,                /* ENQUANTO  */
     FACA = 264,                    /* FACA  */
-    FIM = 265,                     /* FIM  */
+    FIMENQUANTO = 265,             /* FIMENQUANTO  */
     VIRGULA = 266,                 /* VIRGULA  */
     GT = 267,                      /* GT  */
     LT = 268,                      /* LT  */
@@ -146,7 +146,9 @@ extern int yydebug;
     MULT = 277,                    /* MULT  */
     SOMA = 278,                    /* SOMA  */
     EXECUTE = 279,                 /* EXECUTE  */
-    VARNAME = 280                  /* VARNAME  */
+    FIMSE = 280,                   /* FIMSE  */
+    VARNAME = 281,                 /* VARNAME  */
+    NUMBER = 282                   /* NUMBER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -162,7 +164,7 @@ extern int yydebug;
 #define HORADOSHOW 262
 #define ENQUANTO 263
 #define FACA 264
-#define FIM 265
+#define FIMENQUANTO 265
 #define VIRGULA 266
 #define GT 267
 #define LT 268
@@ -177,7 +179,9 @@ extern int yydebug;
 #define MULT 277
 #define SOMA 278
 #define EXECUTE 279
-#define VARNAME 280
+#define FIMSE 280
+#define VARNAME 281
+#define NUMBER 282
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -189,7 +193,7 @@ union YYSTYPE
     int intval;
     char* strval;
 
-#line 193 "y.tab.c"
+#line 197 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -219,7 +223,7 @@ enum yysymbol_kind_t
   YYSYMBOL_HORADOSHOW = 7,                 /* HORADOSHOW  */
   YYSYMBOL_ENQUANTO = 8,                   /* ENQUANTO  */
   YYSYMBOL_FACA = 9,                       /* FACA  */
-  YYSYMBOL_FIM = 10,                       /* FIM  */
+  YYSYMBOL_FIMENQUANTO = 10,               /* FIMENQUANTO  */
   YYSYMBOL_VIRGULA = 11,                   /* VIRGULA  */
   YYSYMBOL_GT = 12,                        /* GT  */
   YYSYMBOL_LT = 13,                        /* LT  */
@@ -234,12 +238,15 @@ enum yysymbol_kind_t
   YYSYMBOL_MULT = 22,                      /* MULT  */
   YYSYMBOL_SOMA = 23,                      /* SOMA  */
   YYSYMBOL_EXECUTE = 24,                   /* EXECUTE  */
-  YYSYMBOL_VARNAME = 25,                   /* VARNAME  */
-  YYSYMBOL_YYACCEPT = 26,                  /* $accept  */
-  YYSYMBOL_program = 27,                   /* program  */
-  YYSYMBOL_varlist = 28,                   /* varlist  */
-  YYSYMBOL_cmds = 29,                      /* cmds  */
-  YYSYMBOL_cmd = 30                        /* cmd  */
+  YYSYMBOL_FIMSE = 25,                     /* FIMSE  */
+  YYSYMBOL_VARNAME = 26,                   /* VARNAME  */
+  YYSYMBOL_NUMBER = 27,                    /* NUMBER  */
+  YYSYMBOL_YYACCEPT = 28,                  /* $accept  */
+  YYSYMBOL_program = 29,                   /* program  */
+  YYSYMBOL_varlist = 30,                   /* varlist  */
+  YYSYMBOL_cmds = 31,                      /* cmds  */
+  YYSYMBOL_exp = 32,                       /* exp  */
+  YYSYMBOL_cmd = 33                        /* cmd  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -567,19 +574,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   98
+#define YYLAST   89
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  26
+#define YYNTOKENS  28
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  5
+#define YYNNTS  6
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  20
+#define YYNRULES  21
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  80
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   280
+#define YYMAXUTOK   282
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -621,16 +628,16 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25
+      25,    26,    27
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    29,    29,    63,    72,    81,    89,    98,   126,   150,
-     157,   178,   186,   207,   242,   267,   274,   281,   288,   295,
-     302
+       0,    51,    51,    83,    92,   101,   109,   117,   124,   130,
+     137,   164,   171,   178,   206,   248,   272,   279,   286,   293,
+     300,   307
 };
 #endif
 
@@ -647,10 +654,10 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "AQUIACABOU", "EQ",
-  "RECEBA", "DEVOLVA", "HORADOSHOW", "ENQUANTO", "FACA", "FIM", "VIRGULA",
-  "GT", "LT", "GE", "LE", "ABREPAR", "FECHAPAR", "ZERA", "SE", "ENTAO",
-  "SENAO", "MULT", "SOMA", "EXECUTE", "VARNAME", "$accept", "program",
-  "varlist", "cmds", "cmd", YY_NULLPTR
+  "RECEBA", "DEVOLVA", "HORADOSHOW", "ENQUANTO", "FACA", "FIMENQUANTO",
+  "VIRGULA", "GT", "LT", "GE", "LE", "ABREPAR", "FECHAPAR", "ZERA", "SE",
+  "ENTAO", "SENAO", "MULT", "SOMA", "EXECUTE", "FIMSE", "VARNAME",
+  "NUMBER", "$accept", "program", "varlist", "cmds", "exp", "cmd", YY_NULLPTR
 };
 
 static const char *
@@ -660,7 +667,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-24)
+#define YYPACT_NINF (-23)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -674,14 +681,14 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -1,    -4,     2,    12,    18,   -24,    -4,    -4,   -24,    21,
-      -5,    17,    28,    30,    36,    39,    40,    -5,    45,    46,
-      47,    29,    31,    -5,    -3,    42,    41,    43,    44,    48,
-      49,    50,    51,    52,    53,    35,   -24,   -24,    -5,    -5,
-      26,    54,    56,    60,    55,    -5,    64,    68,    69,    29,
-     -24,    71,    72,    58,    59,    61,    62,   -24,    67,    65,
-      66,    -5,   -24,   -24,    75,    76,    77,    78,    -5,    79,
-      80,    81,   -24,   -24,   -24,   -24,   -24,   -24,   -24,   -24
+      -2,   -12,     4,     6,    16,   -23,   -12,   -12,   -23,    18,
+      -3,    59,    10,    13,    15,    17,    19,    59,    21,    27,
+      33,    23,    29,    -3,    23,   -23,    25,   -23,    59,    59,
+      59,    59,    26,    31,    59,    59,    59,    59,   -23,   -23,
+      -3,    42,    43,    44,    46,    41,    -3,    48,    49,    50,
+     -23,    52,    59,    59,    59,    59,   -23,   -19,    59,    59,
+      -3,   -23,    51,    58,    62,    63,    -3,   -23,    67,    70,
+      71,   -23,   -23,   -23,   -23,    64,   -23,   -23,   -23,   -23
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -691,24 +698,24 @@ static const yytype_int8 yydefact[] =
 {
        0,     0,     0,     4,     0,     1,     0,     0,     3,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     6,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     2,     5,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     9,
-      10,     0,     0,     0,     0,     0,     0,    11,    12,     0,
-       0,     0,     7,     8,     0,     0,     0,     0,     0,     0,
-       0,     0,    15,    16,    17,    18,    13,    19,    20,    14
+       0,     0,     0,     6,     8,     9,     0,     7,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     2,     5,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+      11,     0,     0,     0,     0,     0,    12,     0,     0,     0,
+       0,    10,     0,     0,     0,     0,     0,    13,     0,     0,
+       0,    16,    17,    18,    19,     0,    20,    21,    15,    14
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -24,   -24,    20,   -23,    -6
+     -23,   -23,     1,   -22,    11,   -10
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     4,    22,    23
+       0,     2,     4,    22,    26,    27
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -716,60 +723,58 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      37,    35,     5,    11,     1,    25,    38,    12,    13,    14,
-      15,    31,    50,    16,    17,    51,    52,    18,    19,    20,
-      21,     3,    58,     6,     7,    11,     8,     9,    10,    12,
-      13,    14,    15,    35,    36,    16,    17,    53,    71,    18,
-      19,    20,    24,    11,    26,    76,    27,    12,    13,    14,
-      15,    39,    28,    16,    17,    29,    30,    18,    19,    20,
-      49,    32,    33,    34,     0,    54,    40,    55,    41,    42,
-      45,    56,    57,    43,    44,    59,    46,    47,    48,    60,
-      61,    62,    63,    64,    65,     0,    66,    67,    68,     0,
-      69,    70,    72,    73,    74,    75,    77,    78,    79
+      23,    39,    66,     1,     5,    11,    67,     8,     9,    12,
+      13,    14,    15,    23,     3,    16,    17,     6,    51,    18,
+      19,    20,     7,    21,    57,    10,    28,    37,    33,    29,
+      23,    30,    38,    31,    40,    32,    23,    34,    70,    41,
+      42,    43,    44,    35,    75,    47,    48,    49,    50,    36,
+      23,    46,    45,    52,    53,    54,    23,    55,    56,    58,
+      59,    60,    61,    62,    63,    64,    65,    11,    71,    68,
+      69,    12,    13,    14,    15,    72,     0,    16,    17,    73,
+      74,    18,    19,    20,    76,    24,    25,    77,    78,    79
 };
 
 static const yytype_int8 yycheck[] =
 {
-      23,     4,     0,     8,     5,    11,     9,    12,    13,    14,
-      15,    17,    35,    18,    19,    38,    39,    22,    23,    24,
-      25,    25,    45,    11,     6,     8,     6,     7,     7,    12,
-      13,    14,    15,     4,     3,    18,    19,    11,    61,    22,
-      23,    24,    25,     8,    16,    68,    16,    12,    13,    14,
-      15,     9,    16,    18,    19,    16,    16,    22,    23,    24,
-      25,    16,    16,    16,    -1,    11,    25,    11,    25,    25,
-      20,    11,    17,    25,    25,    11,    25,    25,    25,    11,
-      11,    10,    10,    25,    25,    -1,    25,    25,    21,    -1,
-      25,    25,    17,    17,    17,    17,    17,    17,    17
+      10,    23,    21,     5,     0,     8,    25,     6,     7,    12,
+      13,    14,    15,    23,    26,    18,    19,    11,    40,    22,
+      23,    24,     6,    26,    46,     7,    16,     4,    17,    16,
+      40,    16,     3,    16,     9,    16,    46,    16,    60,    28,
+      29,    30,    31,    16,    66,    34,    35,    36,    37,    16,
+      60,    20,    26,    11,    11,    11,    66,    11,    17,    11,
+      11,    11,    10,    52,    53,    54,    55,     8,    17,    58,
+      59,    12,    13,    14,    15,    17,    -1,    18,    19,    17,
+      17,    22,    23,    24,    17,    26,    27,    17,    17,    25
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     5,    27,    25,    28,     0,    11,     6,    28,    28,
+       0,     5,    29,    26,    30,     0,    11,     6,    30,    30,
        7,     8,    12,    13,    14,    15,    18,    19,    22,    23,
-      24,    25,    29,    30,    25,    30,    16,    16,    16,    16,
-      16,    30,    16,    16,    16,     4,     3,    29,     9,     9,
-      25,    25,    25,    25,    25,    20,    25,    25,    25,    25,
-      29,    29,    29,    11,    11,    11,    11,    17,    29,    11,
-      11,    11,    10,    10,    25,    25,    25,    25,    21,    25,
-      25,    29,    17,    17,    17,    17,    29,    17,    17,    17
+      24,    26,    31,    33,    26,    27,    32,    33,    16,    16,
+      16,    16,    16,    32,    16,    16,    16,     4,     3,    31,
+       9,    32,    32,    32,    32,    26,    20,    32,    32,    32,
+      32,    31,    11,    11,    11,    11,    17,    31,    11,    11,
+      11,    10,    32,    32,    32,    32,    21,    25,    32,    32,
+      31,    17,    17,    17,    17,    31,    17,    17,    17,    25
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    26,    27,    28,    28,    29,    29,    30,    30,    30,
-      30,    30,    30,    30,    30,    30,    30,    30,    30,    30,
-      30
+       0,    28,    29,    30,    30,    31,    31,    32,    32,    32,
+      33,    33,    33,    33,    33,    33,    33,    33,    33,    33,
+      33,    33
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     7,     3,     1,     2,     1,     5,     5,     3,
-       3,     4,     4,     6,     6,     6,     6,     6,     6,     6,
-       6
+       0,     2,     7,     3,     1,     2,     1,     1,     1,     1,
+       5,     3,     4,     5,     7,     6,     6,     6,     6,     6,
+       6,     6
 };
 
 
@@ -1233,43 +1238,41 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: RECEBA varlist DEVOLVA varlist HORADOSHOW cmds AQUIACABOU  */
-#line 30 "horadoshow.y"
+#line 52 "horadoshow.y"
         {
 		fprintf(output,"#include <stdio.h>\n #include <stdlib.h>\n #include <string.h>\n  int main(int argc,char** argv){\n");
 		StringList*	node = (yyvsp[-5].listVal);
 		int contVars = 1;
 		
 		while(node != NULL){
-			printf("int %s; \n",node->string);
-			fprintf(output,"int %s=atoi(argv[%d]); \n",node->string,contVars);
+ 			fprintf(output,"int %s=atoi(argv[%d]); \n",node->string,contVars);
 			node = node->next;
 			contVars++;
 		}
 
 		node = (yyvsp[-1].listVal);
 		while(node != NULL){
-			printf("%s \n",node->string);
-			fprintf(output,"%s",node->string);
-			
+ 			fprintf(output,"%s",node->string);
+			fprintf(output,";\n");
+
 			node = node->next;
 		}
 
 		node = (yyvsp[-3].listVal);
 		while(node != NULL){
-			printf("%s \n",node->string);
-			fprintf(output,"printf(\"%%d\",%s);\n",node->string);
+ 			fprintf(output,"printf(\"%%d\",%s);\n",node->string);
 		
 			node = node->next;
 		}
 
 		fprintf(output,"}");
-		printf("PROGRAMA!");
+		printf("FIM DO PROGRAMA!");
 	}
-#line 1269 "y.tab.c"
+#line 1272 "y.tab.c"
     break;
 
   case 3: /* varlist: VARNAME VIRGULA varlist  */
-#line 64 "horadoshow.y"
+#line 84 "horadoshow.y"
         {
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		node->string = (yyvsp[-2].strval);
@@ -1277,301 +1280,291 @@ yyreduce:
 		(yyval.listVal) = node;
 		printf("int %s; \n ",((yyvsp[-2].strval)));
 	}
-#line 1281 "y.tab.c"
+#line 1284 "y.tab.c"
     break;
 
   case 4: /* varlist: VARNAME  */
-#line 73 "horadoshow.y"
+#line 93 "horadoshow.y"
         {
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		node->string = (yyvsp[0].strval);
 		node->next = NULL;
 		(yyval.listVal) = node;
 	}
-#line 1292 "y.tab.c"
+#line 1295 "y.tab.c"
     break;
 
   case 5: /* cmds: cmd cmds  */
-#line 82 "horadoshow.y"
+#line 102 "horadoshow.y"
         {
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		node->string = (yyvsp[-1].strval);
 		node->next = (yyvsp[0].listVal);
 		(yyval.listVal) = node;
 	}
-#line 1303 "y.tab.c"
+#line 1306 "y.tab.c"
     break;
 
   case 6: /* cmds: cmd  */
-#line 90 "horadoshow.y"
+#line 110 "horadoshow.y"
         {
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		node->string = (yyvsp[0].strval);
 		node->next = NULL;
 		(yyval.listVal) = node;
 	}
-#line 1314 "y.tab.c"
+#line 1317 "y.tab.c"
     break;
 
-  case 7: /* cmd: ENQUANTO VARNAME FACA cmds FIM  */
-#line 99 "horadoshow.y"
+  case 7: /* exp: cmd  */
+#line 117 "horadoshow.y"
+           {
+	StringList *node = (StringList*) malloc(sizeof(StringList));
+		node->string = (yyvsp[0].strval);
+		node->next = NULL;
+		(yyval.listVal) = node;
+
+	}
+#line 1329 "y.tab.c"
+    break;
+
+  case 8: /* exp: VARNAME  */
+#line 124 "horadoshow.y"
+                {
+		StringList *node = (StringList*) malloc(sizeof(StringList));
+		node->string = (yyvsp[0].strval);
+		node->next = NULL;
+		(yyval.listVal) = node;
+	}
+#line 1340 "y.tab.c"
+    break;
+
+  case 9: /* exp: NUMBER  */
+#line 130 "horadoshow.y"
+               {
+		StringList *node = (StringList*) malloc(sizeof(StringList));
+		node->string = (yyvsp[0].strval);
+		node->next = NULL;
+		(yyval.listVal) = node;
+	}
+#line 1351 "y.tab.c"
+    break;
+
+  case 10: /* cmd: ENQUANTO exp FACA cmds FIMENQUANTO  */
+#line 138 "horadoshow.y"
         {
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		int sizeComandos = 0;
-		node = (yyvsp[-1].listVal);
-		printf("antes while\n");
 
-		while(node != NULL){
-			sizeComandos+= strlen(node->string);
-			node = node->next;
- 		}
-
-   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
-		printf("%s dps do primeiro white \n",buf);
-		strcat(buf,"while(");
-		strcat(buf, (yyvsp[-3].strval));
-		strcat(buf,"){\n");
- 		node = (yyvsp[-1].listVal);
-		while(node != NULL){
-			strcat(buf,node->string);
-			node= node->next;
-		}
-		printf("%s dps do segundo while\n",buf);
-		strcat(buf,"}\n");
-		(yyval.strval) = strdup(buf);
-
-	}
-#line 1345 "y.tab.c"
-    break;
-
-  case 8: /* cmd: ENQUANTO cmd FACA cmds FIM  */
-#line 127 "horadoshow.y"
-        {
-		StringList *node = (StringList*) malloc(sizeof(StringList));
-		int sizeComandos = 0;
 		node = (yyvsp[-1].listVal);
 		while(node != NULL){
-			sizeComandos+= strlen(node->string);
+			sizeComandos += strlen(node->string);
 			node = node->next;
 		}
 
-   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+   		char *buf = (char*) malloc(sizeof(char) * sizeComandos + 100 );
 		strcat(buf,"while(");
-		strcat(buf, (yyvsp[-3].strval));
+		strcat(buf, (yyvsp[-3].listVal)->string);
 		strcat(buf,"){\n");
 		node = (yyvsp[-1].listVal);
 		while(node != NULL){
 			strcat(buf,node->string);
+			strcat(buf,";\n");
+
 			node= node->next;
 		}
 		strcat(buf,"}\n");
 		(yyval.strval) = strdup(buf);
-
 	}
-#line 1372 "y.tab.c"
+#line 1380 "y.tab.c"
     break;
 
-  case 9: /* cmd: VARNAME EQ VARNAME  */
-#line 151 "horadoshow.y"
+  case 11: /* cmd: VARNAME EQ exp  */
+#line 165 "horadoshow.y"
         {
 		char buf[500];
-    	sprintf(buf,"%s = %s;\n",(yyvsp[-2].strval),(yyvsp[0].strval));
+		sprintf(buf,"%s = %s",(yyvsp[-2].strval),(yyvsp[0].listVal)->string);
 		(yyval.strval) = strdup(buf);
-
 	}
-#line 1383 "y.tab.c"
+#line 1390 "y.tab.c"
     break;
 
-  case 10: /* cmd: VARNAME EQ cmds  */
-#line 158 "horadoshow.y"
-                { 
-		
-		StringList *node = (StringList*) malloc(sizeof(StringList));
-		int sizeComandos=0;
-		node= (yyvsp[0].listVal);
-		while(node!=NULL) {
-			sizeComandos+= strlen(node->string);
-			node= node->next;
-			}
-		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
-		node= (yyvsp[0].listVal);
-		strcat (buf, (yyvsp[-2].strval));
-		strcat (buf, "=");
-		while (node!=NULL) {
-			strcat (buf, node->string);
-			node= node->next;
-			}
-		(yyval.strval) = strdup (buf);
-	}
-#line 1407 "y.tab.c"
-    break;
-
-  case 11: /* cmd: ZERA ABREPAR VARNAME FECHAPAR  */
-#line 179 "horadoshow.y"
+  case 12: /* cmd: ZERA ABREPAR VARNAME FECHAPAR  */
+#line 172 "horadoshow.y"
         {
 		char buf[500];
 		sprintf(buf,"%s = 0",(yyvsp[-1].strval));
     	(yyval.strval) = strdup(buf);
 	}
-#line 1417 "y.tab.c"
+#line 1400 "y.tab.c"
     break;
 
-  case 12: /* cmd: SE cmd ENTAO cmds  */
-#line 187 "horadoshow.y"
+  case 13: /* cmd: SE exp ENTAO cmds FIMSE  */
+#line 179 "horadoshow.y"
         {
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		int sizeComandos = 0;
-		node = (yyvsp[0].listVal);
+		
+		node = (yyvsp[-1].listVal);
 		while(node != NULL){
-			sizeComandos+= strlen(node->string);
+			sizeComandos += strlen(node->string);
 			node = node->next;
 		}
 
-   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+   		char *buf = (char*) malloc(sizeof(char) * sizeComandos + 100 );
 		strcat(buf,"if(");
-		strcat(buf, (yyvsp[-2].strval));
+		strcat(buf, (yyvsp[-3].listVal)->string);
 		strcat(buf,"){\n");
-		node = (yyvsp[0].listVal);
+		
+		node = (yyvsp[-1].listVal);
 		while(node != NULL){
 			strcat(buf,node->string);
+			strcat(buf,";\n");
+
 			node= node->next;
 		}
+		
 		strcat(buf,"}\n");
 		(yyval.strval) = strdup(buf);
-}
-#line 1443 "y.tab.c"
+	}
+#line 1431 "y.tab.c"
     break;
 
-  case 13: /* cmd: SE cmd ENTAO cmds SENAO cmds  */
-#line 208 "horadoshow.y"
+  case 14: /* cmd: SE exp ENTAO cmds SENAO cmds FIMSE  */
+#line 207 "horadoshow.y"
         {
 		StringList *node = (StringList*) malloc(sizeof(StringList));
 		int sizeComandosIf = 0;
 		int sizeComandosElse = 0;
+		node = (yyvsp[-3].listVal);
+		while(node != NULL){
+			sizeComandosIf += strlen(node->string);
+			node = node->next;
+		}
+		node = (yyvsp[-1].listVal);
+		while(node != NULL){
+			sizeComandosElse += strlen(node->string);
+			node = node->next;
+		}
 
-		node = (yyvsp[-2].listVal);
-		while(node != NULL){
-			sizeComandosIf+= strlen(node->string);
-			node = node->next;
-		}
-		node = (yyvsp[0].listVal);
-		while(node != NULL){
-			sizeComandosElse+= strlen(node->string);
-			node = node->next;
-		}
-   		char *buf = (char*) malloc(sizeof(char)*sizeComandosIf + sizeof(char)*sizeComandosElse+ 100 );
+		char *buf = (char*) malloc(sizeof(char)*sizeComandosIf + sizeof(char) * sizeComandosElse+ 100 );
 		strcat(buf,"if(");
-		strcat(buf, (yyvsp[-4].strval));
+		strcat(buf, (yyvsp[-5].listVal)->string);
 		strcat(buf,"){\n");
-		node = (yyvsp[-2].listVal);
+		
+		node = (yyvsp[-3].listVal);
 		while(node != NULL){
 			strcat(buf,node->string);
-			node= node->next;
+			strcat(buf,";\n");
+
+			node = node->next;
 		}
+		
 		strcat(buf,"}\n");
 		strcat(buf,"else{\n");
-		node = (yyvsp[0].listVal);
+		
+		node = (yyvsp[-1].listVal);
 		while(node != NULL){
 			strcat(buf,node->string);
-			node= node->next;
+			strcat(buf,";\n");
+			node = node->next;
 		}
+		
 		strcat(buf,"}\n");
 		(yyval.strval) = strdup(buf);
-}
-#line 1482 "y.tab.c"
+	}
+#line 1477 "y.tab.c"
     break;
 
-  case 14: /* cmd: EXECUTE ABREPAR VARNAME VIRGULA cmds FECHAPAR  */
-#line 243 "horadoshow.y"
- {
-	printf("ASASASASAS");
-
-	StringList *node = (StringList*) malloc(sizeof(StringList));
+  case 15: /* cmd: EXECUTE ABREPAR exp VIRGULA cmds FECHAPAR  */
+#line 249 "horadoshow.y"
+        {
+		StringList *node = (StringList*) malloc(sizeof(StringList));
 		int sizeComandos = 0;
 		node = (yyvsp[-1].listVal);
 		while(node != NULL){
-			sizeComandos+= strlen(node->string);
+			sizeComandos += strlen(node->string);
 			node = node->next;
 		}
-   		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
-		printf("ASASASASAS");
-		strcat(buf,"int cont=0;\n");
-		strcat(buf,"while(cont<");
-		strcat(buf,(yyvsp[-3].strval));
-		strcat(buf,"){\n");
+		char *buf = (char*) malloc(sizeof(char)*sizeComandos + 100 );
+		strcat(buf,"for(int cont=0;cont<");
+		strcat(buf,(yyvsp[-3].listVal)->string);
+		strcat(buf,";cont++){\n");	
 		node = (yyvsp[-1].listVal);
 		while(node != NULL){
 			strcat(buf,node->string);
-			node= node->next;
-		}
+			node = node->next;
+			strcat(buf,";\n");
+
+		}	
 		strcat(buf,"}\n");
 		(yyval.strval) = strdup(buf);
- }
-#line 1511 "y.tab.c"
+	}
+#line 1504 "y.tab.c"
     break;
 
-  case 15: /* cmd: GT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
-#line 268 "horadoshow.y"
+  case 16: /* cmd: GT ABREPAR exp VIRGULA exp FECHAPAR  */
+#line 273 "horadoshow.y"
         {
 		char buf[500];
-		sprintf(buf,"%s > 0",(yyvsp[-3].strval));
-    (yyval.strval) = strdup(buf);
+		sprintf(buf,"%s > %s", (yyvsp[-3].listVal)->string,(yyvsp[-1].listVal)->string);
+    	(yyval.strval) = strdup(buf);
 	}
-#line 1521 "y.tab.c"
+#line 1514 "y.tab.c"
     break;
 
-  case 16: /* cmd: LT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
-#line 275 "horadoshow.y"
+  case 17: /* cmd: LT ABREPAR exp VIRGULA exp FECHAPAR  */
+#line 280 "horadoshow.y"
         {
 		char buf[500];
-		sprintf(buf,"%s < 0",(yyvsp[-3].strval));
-    (yyval.strval) = strdup(buf);
+		sprintf(buf,"%s < %s" ,(yyvsp[-3].listVal)->string,(yyvsp[-1].listVal)->string);
+    	(yyval.strval) = strdup(buf);
 	}
-#line 1531 "y.tab.c"
+#line 1524 "y.tab.c"
     break;
 
-  case 17: /* cmd: GE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
-#line 282 "horadoshow.y"
+  case 18: /* cmd: GE ABREPAR exp VIRGULA exp FECHAPAR  */
+#line 287 "horadoshow.y"
         {
 		char buf[500];
-		sprintf(buf,"%s >= 0",(yyvsp[-3].strval));
-    (yyval.strval) = strdup(buf);
+		sprintf(buf,"%s >= %s" ,(yyvsp[-3].listVal)->string,(yyvsp[-1].listVal)->string);
+    	(yyval.strval) = strdup(buf);
 	}
-#line 1541 "y.tab.c"
+#line 1534 "y.tab.c"
     break;
 
-  case 18: /* cmd: LE ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
-#line 289 "horadoshow.y"
+  case 19: /* cmd: LE ABREPAR exp VIRGULA exp FECHAPAR  */
+#line 294 "horadoshow.y"
         {
 		char buf[500];
-		sprintf(buf,"%s <= 0",(yyvsp[-3].strval));
-    (yyval.strval) = strdup(buf);
+		sprintf(buf,"%s <= %s", (yyvsp[-3].listVal)->string,(yyvsp[-1].listVal)->string);
+    	(yyval.strval) = strdup(buf);
 	}
-#line 1551 "y.tab.c"
+#line 1544 "y.tab.c"
     break;
 
-  case 19: /* cmd: MULT ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
-#line 296 "horadoshow.y"
-{
-char buf[500];
-sprintf(buf, "%s * %s;\n", (yyvsp[-3].strval),(yyvsp[-1].strval));
-(yyval.strval) = strdup(buf);
-}
-#line 1561 "y.tab.c"
+  case 20: /* cmd: MULT ABREPAR exp VIRGULA exp FECHAPAR  */
+#line 301 "horadoshow.y"
+        {
+		char buf[500];
+		sprintf(buf, "%s * %s", (yyvsp[-3].listVal)->string,(yyvsp[-1].listVal)->string);
+		(yyval.strval) = strdup(buf);
+	}
+#line 1554 "y.tab.c"
     break;
 
-  case 20: /* cmd: SOMA ABREPAR VARNAME VIRGULA VARNAME FECHAPAR  */
-#line 303 "horadoshow.y"
-{
-char buf[500];
-sprintf(buf, "%s + %s;\n", (yyvsp[-3].strval),(yyvsp[-1].strval));
-(yyval.strval) = strdup (buf);
-}
-#line 1571 "y.tab.c"
+  case 21: /* cmd: SOMA ABREPAR exp VIRGULA exp FECHAPAR  */
+#line 308 "horadoshow.y"
+        {
+		char buf[500];
+		sprintf(buf, "%s + %s", (yyvsp[-3].listVal)->string,(yyvsp[-1].listVal)->string);
+		(yyval.strval) = strdup (buf);
+	}
+#line 1564 "y.tab.c"
     break;
 
 
-#line 1575 "y.tab.c"
+#line 1568 "y.tab.c"
 
       default: break;
     }
@@ -1764,7 +1757,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 310 "horadoshow.y"
+#line 314 "horadoshow.y"
 
 
 void yyerror(char *c)
@@ -1803,15 +1796,11 @@ int main(int argc, char* argv[]){
         exit(1);
     }else printf(" OK!\n");
 
-
-
     yyin = input;
     yyparse();
 
-
     fclose(input);
     fclose(output);
-
 
     return 0;
 }
