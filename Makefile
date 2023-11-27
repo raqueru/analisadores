@@ -1,13 +1,13 @@
-show: horadoshow.y horadoshow.l lex.yy.c y.tab.c y.tab.h
-	yacc -dy horadoshow.y
-	lex horadoshow.l
-	gcc -o horadoshow lex.yy.c y.tab.c
+show: horadoShow.y horaDoShow.l lex.yy.c y.tab.c y.tab.h
+	yacc -dy horadoShow.y
+	lex horaDoShow.l
+	gcc -o horadoshow.exe lex.yy.c y.tab.c
 
 runshow:
-	./horadoshow entrada.txt saida.c
+	./horadoshow.exe entrada.txt saida.c
 
 saida: saida.c
-	gcc -o resultado saida.c
+	gcc -o resultado.exe saida.c
 
 runsaida:
-	./resultado 1 2 3
+	./resultado.exe 1 2 3

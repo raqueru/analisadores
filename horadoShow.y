@@ -16,6 +16,7 @@ FILE *output;
     int intval;
     char* strval;
 }
+
  
 %token AQUIACABOU
 	EQ
@@ -50,13 +51,20 @@ FILE *output;
 program:
 	RECEBA varlist DEVOLVA varlist HORADOSHOW cmds AQUIACABOU
 	{
-		fprintf(output,"#include <stdio.h>\n #include <stdlib.h>\n #include <string.h>\n  int main(int argc,char** argv){\n");
+		fprintf(output,"#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\nint main(int argc,char** argv){\n");
 		StringList*	node = $2;
+		StringList* nodeD = $4;
 		int contVars = 1;
-		
+
 		while(node != NULL){
- 			fprintf(output,"int %s=atoi(argv[%d]); \n",node->string,contVars);
+ 			fprintf(output,"int %s=atoi(argv[%d]);\n",node->string,contVars);
 			node = node->next;
+			contVars++;
+		}
+
+		while(nodeD != NULL){
+ 			fprintf(output,"int %s=atoi(argv[%d]);\n",nodeD->string,contVars);
+			nodeD = nodeD->next;
 			contVars++;
 		}
 
@@ -71,7 +79,6 @@ program:
 		node = $4;
 		while(node != NULL){
  			fprintf(output,"printf(\"%%d\",%s);\n",node->string);
-		
 			node = node->next;
 		}
 

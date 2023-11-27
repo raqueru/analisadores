@@ -1,5 +1,5 @@
 
-#line 3 "lex.yy.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -499,15 +499,15 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "horadoshow.l"
-#line 2 "horadoshow.l"
+#line 1 "horaDoShow.l"
+#line 2 "horaDoShow.l"
 #include "stringlist.h"
 #include "y.tab.h"
 #include <stdio.h>
 #include <string.h>
 void yyerror(char* c);
+#line 509 "lex.yy.c"
 #line 510 "lex.yy.c"
-#line 511 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -724,11 +724,11 @@ YY_DECL
 		}
 
 	{
-#line 10 "horadoshow.l"
+#line 10 "horaDoShow.l"
 
 
 
-#line 732 "lex.yy.c"
+#line 731 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -787,122 +787,122 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "horadoshow.l"
+#line 13 "horaDoShow.l"
 {return RECEBA;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 14 "horadoshow.l"
+#line 14 "horaDoShow.l"
 {return DEVOLVA;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "horadoshow.l"
+#line 15 "horaDoShow.l"
 {return HORADOSHOW;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "horadoshow.l"
+#line 16 "horaDoShow.l"
 {return SE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 17 "horadoshow.l"
+#line 17 "horaDoShow.l"
 {return ENTAO;} 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 18 "horadoshow.l"
+#line 18 "horaDoShow.l"
 {return SENAO;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 19 "horadoshow.l"
+#line 19 "horaDoShow.l"
 {return ENQUANTO;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 20 "horadoshow.l"
+#line 20 "horaDoShow.l"
 {return ABREPAR;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 21 "horadoshow.l"
+#line 21 "horaDoShow.l"
 {return FECHAPAR;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 22 "horadoshow.l"
+#line 22 "horaDoShow.l"
 {return FACA;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 23 "horadoshow.l"
+#line 23 "horaDoShow.l"
 {return FIMENQUANTO;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 24 "horadoshow.l"
+#line 24 "horaDoShow.l"
 {return VIRGULA;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 25 "horadoshow.l"
+#line 25 "horaDoShow.l"
 {return GT;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 26 "horadoshow.l"
+#line 26 "horaDoShow.l"
 {return LT;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 27 "horadoshow.l"
+#line 27 "horaDoShow.l"
 { return ZERA;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 28 "horadoshow.l"
+#line 28 "horaDoShow.l"
 {return GE;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 29 "horadoshow.l"
+#line 29 "horaDoShow.l"
 {return FIMSE;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 30 "horadoshow.l"
+#line 30 "horaDoShow.l"
 {return LE;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 31 "horadoshow.l"
+#line 31 "horaDoShow.l"
 {return AQUIACABOU;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 32 "horadoshow.l"
+#line 32 "horaDoShow.l"
 {return MULT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 33 "horadoshow.l"
+#line 33 "horaDoShow.l"
 {return SOMA;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 34 "horadoshow.l"
+#line 34 "horaDoShow.l"
 {return EXECUTE;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 35 "horadoshow.l"
+#line 35 "horaDoShow.l"
 {return EQ;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 37 "horadoshow.l"
+#line 37 "horaDoShow.l"
 {
 	yylval.strval = strdup(yytext);
 	return VARNAME;
@@ -911,7 +911,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 42 "horadoshow.l"
+#line 42 "horaDoShow.l"
 {
     yylval.strval = strdup(yytext);
     return NUMBER; 
@@ -919,10 +919,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 46 "horadoshow.l"
+#line 46 "horaDoShow.l"
 ECHO;
 	YY_BREAK
-#line 926 "lex.yy.c"
+#line 925 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1927,7 +1927,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 46 "horadoshow.l"
+#line 46 "horaDoShow.l"
 
  
 int yywrap()
